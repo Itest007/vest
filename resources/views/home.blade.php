@@ -39,7 +39,7 @@
                 </form>
             </div>
         </div>
-        <table class="table table-bordered mt-3 text-center">
+        <table class="table table-bordered  table-striped mt-3 text-center">
             <thead>
             <tr class="bg-dark text-light">
                 <th scope="col">ID</th>
