@@ -35,7 +35,7 @@
                             <input type="text" class="form-control" name="link" placeholder="链接">
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary ">创建条目</button>
+                    <button type="submit" class="btn btn-primary mx-auto d-block">创建条目</button>
                 </form>
             </div>
         </div>
