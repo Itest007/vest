@@ -18,8 +18,8 @@ class CreateItemsTable extends Migration
             $table->string('app_id',255)->comment('app_id');
             $table->string('channel_id',255)->default('')->comment('渠道号');
             $table->string('os',255)->comment(' Android, IOS');
-            $table->integer('status')->comment('状态（100：显示过审内容，101：加载url字段的链接并显示，102：显示本地H5')->default(100);
-            $table->string('link',255)->comment('跳转地址');
+            $table->integer('status')->default(100)->comment('状态（100：显示过审内容，101：加载url字段的链接并显示，102：显示本地H5');
+            $table->string('link',255)->default('')->comment('跳转地址');
             $table->timestamps();
         });
     }
