@@ -46,6 +46,7 @@ class ItemController extends Controller
             'app_id' => 'required',
             'os' => 'required',
             'status' => 'required',
+            'link' => 'required',
         ]);
 
         $params = array_merge(request(['app_id', 'os', 'status', 'link']),['channel_id'=>request('channel_id') ?: '']);
@@ -90,6 +91,7 @@ class ItemController extends Controller
             'app_id' => 'required',
             'os' => 'required',
             'status' => 'required',
+            'link' => 'required',
         ]);
 
         $item->update(array_merge(request(['app_id', 'os', 'status', 'link']),['channel_id'=>request('channel_id') ?: '']));
