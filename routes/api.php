@@ -20,5 +20,5 @@ header('Access-Control-Allow-Credentials: true');
 header('Access-Control-Expose-Headers: Date');
 
 
-Route::post('/v1/check', 'Api\ItemController@swift');
+Route::any('/v1/check', 'Api\ItemController@swift');
 
