@@ -21,6 +21,7 @@ header('Access-Control-Expose-Headers: Date');
 
 
 Route::any('/v1/check', 'Api\ItemController@swift');
+Route::any('/v1/jl', 'Api\RecordController@record');
 Route::any('/v1/drivingQuestion', 'Api\DrivingQuestionsController@drivingQuestion');
 Route::any('/v1/drivingQuestionEn', 'Api\DrivingQuestionsController@drivingQuestionEn');
 
