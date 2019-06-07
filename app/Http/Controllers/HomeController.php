@@ -26,7 +26,7 @@ class HomeController extends Controller
     {
         $os = $request->input('os', '');
         if ($os) {
-        $items = Item::where(compact('os'))->orderBy('created_at', 'desc')->paginate(20);
+            $items = Item::where(compact('os'))->orderBy('created_at', 'desc')->paginate(20);
         }else{
             $items = Item::orderBy('created_at', 'desc')->paginate(20);
         }
