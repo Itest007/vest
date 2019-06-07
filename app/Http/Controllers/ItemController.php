@@ -19,7 +19,7 @@ class ItemController extends Controller
      */
     public function index()
     {
-        $items = Item::paginate(10);
+        $items = Item::orderBy('created_at', 'desc')->paginate(10);
         return view('home', compact('items'));
     }
 
