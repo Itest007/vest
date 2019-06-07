@@ -24,8 +24,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $items = Item::paginate(10);
-        return view('home',compact('items'));
+        $os = $request->input('os', '');
+        if ($os) {
+        $items = Item::where(compact('os'))->orderBy('created_at', 'desc')->paginate(20);
+        }else{
+            $items = Item::orderBy('created_at', 'desc')->paginate(20);
+        }
+        return view('home', compact('items'));
     }
 
 
