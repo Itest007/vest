@@ -19,7 +19,12 @@ class ItemController extends Controller
      */
     public function index()
     {
-        $items = Item::orderBy('created_at', 'desc')->paginate(10);
+        $os = $request->input('os', '');
+        if ($os) {
+        $items = Item::where(compact('os'))->orderBy('created_at', 'desc')->paginate(20);
+        }else{
+            $items = Item::orderBy('created_at', 'desc')->paginate(20);
+        }
         return view('home', compact('items'));
     }
 
