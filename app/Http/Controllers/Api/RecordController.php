@@ -11,7 +11,7 @@ class RecordController extends Controller
 
     public function index()
     {
-        $items = Record::orderBy('created_at', 'desc')->paginate(10);
+        $items = Record::orderBy('created_at', 'desc');
          return response()->json( ['code' => 1, 'message' => 'Success','data'=>$items] );;
     }
 
