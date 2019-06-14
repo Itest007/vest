@@ -16,10 +16,10 @@ class RecordController extends Controller
         $time_begin = $request->input('time_begin', '00:00:00');
         $time_end = $request->input('time_end', '00:00:00');
         if ($day_begin) {
-          $items = Record::whereDate('day_end', '>=', $day_begin)
-          ->whereDate('day_end', '<=', $day_end)
-          ->whereTime('time_begin', '>=',$time_begin)
-          ->whereTime('time_end', '<=', $time_end)
+          $items = Record::whereDate('created_at', '>=', $day_begin)
+          ->whereDate('created_at', '<=', $day_end)
+          ->whereTime('created_at', '>=',$time_begin)
+          ->whereTime('created_at', '<=', $time_end)
           ->get();
       }else{
         $items = Record::orderBy('created_at', 'desc')->get();
