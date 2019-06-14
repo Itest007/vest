@@ -18,14 +18,14 @@ class RecordController extends Controller
         if ($day_begin) {
           $items = Record::whereDate('created_at', '>=', $day_begin)
           ->whereDate('created_at', '<=', $day_end)
-          ->whereTime('created_at', '>=',$time_begin)
-          ->whereTime('created_at', '<=', $time_end)
+          // ->whereTime('created_at', '>=',$time_begin)
+          // ->whereTime('created_at', '<=', $time_end)
           ->get();
       }else{
         $items = Record::orderBy('created_at', 'desc')->get();
     }
 
-    return response()->json( ['code' => 1, 'message' => 'Success','data'=>$items] );;
+    return response()->json( ['code' => 0, 'message' => 'Success','data'=>$items] );;
 }
 
 public function record(Request $request)
