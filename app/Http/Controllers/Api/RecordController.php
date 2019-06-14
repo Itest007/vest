@@ -9,9 +9,15 @@ use App\Http\Controllers\Controller;
 class RecordController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $items = Record::orderBy('created_at', 'desc')->paginate(1000);
+         $created_at = $request->input('created_at', '');
+         if ($created_at) {
+              $items = Record::where(compact('created_at'))->orderBy('created_at', 'desc')->paginate(1000);
+         }else{
+             $items = Record::orderBy('created_at', 'desc')->paginate(1000);
+         }
+
          return response()->json( ['code' => 1, 'message' => 'Success','data'=>$items] );;
     }
 
