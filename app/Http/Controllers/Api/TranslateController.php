@@ -57,7 +57,9 @@ function dtranslate(Request $request){
     $ret = self::call($bd_url, $args);
     $ret = json_decode($ret, true);
 
-    return $ret;
+   return response()->json(
+        ['code' => 0, 'message' => 'Success', 'data' => $ret]
+    );
 }
 
 //加密
