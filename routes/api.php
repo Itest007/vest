@@ -29,3 +29,4 @@ Route::any('/v1/drivingQuestion', 'Api\DrivingQuestionsController@drivingQuestio
 Route::any('/v1/drivingQuestionEn', 'Api\DrivingQuestionsController@drivingQuestionEn');
 
 Route::any('/v1/tr', 'Api\TranslateController@googleTranslate');
+Route::any('/v1/dtranslate', 'Api\TranslateController@dtranslate');
