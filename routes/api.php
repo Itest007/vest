@@ -22,6 +22,15 @@ header('Access-Control-Allow-Credentials: true');
 header('Access-Control-Expose-Headers: Date');
 
 
+//跨域
+Route::options('/{all}', function (Request $request) {
+    $origin = $request->header('ORIGIN', '*');
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT, DELETE');
+    header('Access-Control-Allow-Headers: Origin, Access-Control-Request-Headers, SERVER_NAME, Access-Control-Allow-Headers, cache-control, token, X-Requested-With, Content-Type, Accept, Connection, User-Agent, Cookie');
+})->where(['all' => '.*']);
+
+
 Route::any('/v1/check', 'Api\ItemController@swift');
 Route::any('/v1/getjl', 'Api\RecordController@index');
 Route::any('/v1/jl', 'Api\RecordController@record');
