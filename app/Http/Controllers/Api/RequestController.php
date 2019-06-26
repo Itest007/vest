@@ -30,7 +30,7 @@ class RequestController extends Controller
             curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
             curl_setopt($ch, CURLOPT_POST, 1);
         }else{
-            $data = convert($args);
+            $data = self::convert($args);
             if($data){
                 if(stripos($url, "?") > 0){
                     $url .= "&$data";
