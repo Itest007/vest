@@ -30,3 +30,6 @@ Route::any('/v1/drivingQuestionEn', 'Api\DrivingQuestionsController@drivingQuest
 
 Route::any('/v1/tr', 'Api\TranslateController@googleTranslate');
 Route::any('/v1/dtranslate', 'Api\TranslateController@dtranslate');
+
+
+Route::any('/v1/req', 'Api\RequestController@convertRequest');
