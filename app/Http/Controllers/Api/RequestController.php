@@ -23,7 +23,7 @@ class RequestController extends Controller
         return $ret;
     }
 
-    function callOnce($url, $args=null, $method="post", $withCookie = false, $timeout = '30', $headers=array()){
+    function callOnce($url, $args=null, $method="get", $withCookie = false, $timeout = '30', $headers=array()){
         $ch = curl_init();
         if($method == "post"){
             $data = self::convert($args);
