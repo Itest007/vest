@@ -31,12 +31,27 @@ class BookController extends Controller
     }
 
 
-    public function characters($id)
+    public function character($id)
     {
 
         $id = $id ?: 1;
 
         $character = Storage::get('public/books/characters'.$id.'.json');
+        $character = json_decode($character,true);
+
+        return response()->json(
+            ['code' => 0, 'message' => 'Success', 'data' => $character]
+        );
+
+    }
+
+
+    public function characters()
+    {
+
+        $id = $id ?: 1;
+
+        $character = Storage::get('public/characters.json');
         $character = json_decode($character,true);
 
         return response()->json(
