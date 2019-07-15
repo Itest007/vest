@@ -47,5 +47,6 @@ Route::any('/v1/req', 'Api\RequestController@convertRequest');
 
 
 Route::any('/v1/books', 'Api\BookController@books');
+Route::any('/v1/houses', 'Api\BookController@houses');
 Route::any('/v1/characters/{id}', 'Api\BookController@characters');
 Route::any('/v1/storeCharacter', 'Api\BookController@storeCharacter');

@@ -19,6 +19,17 @@ class BookController extends Controller
 
     }
 
+    public function houses(Request $request)
+    {
+
+        $houses = Storage::get('public/houses.json');
+        $houses = json_decode($houses,true);
+        return response()->json(
+            ['code' => 0, 'message' => 'Success', 'data' => $houses]
+        );
+
+    }
+
 
     public function characters($id)
     {
