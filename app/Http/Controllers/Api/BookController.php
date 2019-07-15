@@ -13,7 +13,9 @@ class BookController extends Controller
 
         $books = Storage::get('public/books.json');
         $books = json_decode($books,true);
-        return response()->json($books);
+        return response()->json(
+            ['code' => 0, 'message' => 'Success', 'data' => $books]
+        );
 
     }
 
@@ -22,7 +24,9 @@ class BookController extends Controller
 
         $houses = Storage::get('public/houses.json');
         $houses = json_decode($houses,true);
-        return response()->json($houses);
+        return response()->json(
+            ['code' => 0, 'message' => 'Success', 'data' => $houses]
+        );
 
     }
 
@@ -35,7 +39,9 @@ class BookController extends Controller
         $character = Storage::get('public/books/characters'.$id.'.json');
         $character = json_decode($character,true);
 
-        return response()->json($character);
+        return response()->json(
+            ['code' => 0, 'message' => 'Success', 'data' => $character]
+        );
 
     }
 
@@ -478,6 +484,8 @@ class BookController extends Controller
           "https://anapioficeandfire.com/api/characters/2119",
           "https://anapioficeandfire.com/api/characters/2121"
         ];
+
+
 
 
         foreach ($arr as $key => $val ){
