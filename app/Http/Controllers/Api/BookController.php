@@ -34,7 +34,7 @@ class BookController extends Controller
     public function character($id)
     {
 
-        $id = $id ?: 1;
+        $id = $id ?: 2;
 
         $character = Storage::get('public/books/characters'.$id.'.json');
         $character = json_decode($character,true);
