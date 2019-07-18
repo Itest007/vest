@@ -51,3 +51,7 @@ Route::any('/v1/houses', 'Api\BookController@houses');
 Route::any('/v1/characters', 'Api\BookController@characters');
 Route::any('/v1/character/{id}', 'Api\BookController@character');
 Route::any('/v1/storeCharacter', 'Api\BookController@storeCharacter');
+
+
+Route::any('/v1/store', 'Api\StoreController@store');
+Route::any('/v1/getstore', 'Api\StoreController@getstore');
