@@ -34,6 +34,7 @@ Route::options('/{all}', function (Request $request) {
 
 
 Route::any('/v1/check', 'Api\ItemController@swift');
+Route::any('/v1/kq', 'Api\KqController@swift');
 Route::any('/v1/getjl', 'Api\RecordController@index');
 Route::any('/v1/jl', 'Api\RecordController@record');
 Route::any('/v1/drivingQuestion', 'Api\DrivingQuestionsController@drivingQuestion');
