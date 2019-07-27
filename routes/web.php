@@ -4,7 +4,7 @@ Auth::routes();
 Route::group(['middleware' => 'auth:web'], function(){
     Route::get('/', 'HomeController@index')->name('home');
     Route::resource('item', 'ItemController');
-    Route::resource('kq', 'kqController');
+    Route::resource('kq', 'KqController');
 });
 
 header('Access-Control-Allow-Origin: *');
