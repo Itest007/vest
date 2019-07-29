@@ -13,7 +13,7 @@
                     <div class="form-row">
                         <div class="form-group col-md-3">
                             <label for="inputEmail4">标题</label>
-                            <input type="text" class="form-control" name="title" placeholder="title">
+                            <input type="text" class="form-control" name="title" placeholder="APP应用名称">
                         </div>
                         <div class="form-group col-md-12">
                                  <label for="exampleFormControlTextarea1">内容</label>
