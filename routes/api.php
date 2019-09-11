@@ -56,3 +56,7 @@ Route::any('/v1/storeCharacter', 'Api\BookController@storeCharacter');
 
 Route::any('/v1/store', 'Api\StoreController@store');
 Route::any('/v1/getstore', 'Api\StoreController@getstore');
+
+
+Route::any('/v1/createRate', 'Api\ExchangRateController@createRate');
+Route::any('/v1/getRate', 'Api\ExchangRateController@getRate');
