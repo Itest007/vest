@@ -58,7 +58,10 @@ class ExchangRateController extends Controller
                         $insertData[$j]['type']= $k;
                     }
 
-                    $insertData[24]['rate'] = $item[1];
+                    if($i == ($rateCycle-1)){
+                        $insertData[24]['rate'] = $item[1];
+                    }
+
 
                     RateRecord::insert($insertData);
 
