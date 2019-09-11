@@ -36,6 +36,11 @@ class ExchangRateController extends Controller
 
     public function createRate(Request $request){
 
+//        RateRecord::truncate();
+//        return response()->json(
+//            ['code' => 0, 'message' => 'Not allow']
+//        );
+
         $startDate = config('exchangerate.startDate');
         $rateCycle = config('exchangerate.rateCycle');
         $rateRange = config('exchangerate.rateRange');
