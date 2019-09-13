@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Item;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ItemController extends Controller
 {
@@ -20,6 +21,7 @@ class ItemController extends Controller
     public function index(Request $request)
     {
         $os = $request->input('os', '');
+
         if ($os) {
         $items = Item::where(compact('os'))->orderBy('created_at', 'desc')->paginate(20);
         }else{
@@ -53,8 +55,10 @@ class ItemController extends Controller
             'status' => 'required',
             // 'link' => 'required',
         ]);
+        //获取登录用户
+        $adminUser = Auth::getUser()->toArray();
 
-        $params = array_merge(request(['app_id', 'os', 'status', 'link']),['channel_id'=>request('channel_id') ?: '']);
+        $params = array_merge(request(['app_id', 'os', 'status', 'link']),['channel_id'=>request('channel_id') ?: '','create_by'=>$adminUser['id']]);
         Item::create($params);
 
         return redirect('/');

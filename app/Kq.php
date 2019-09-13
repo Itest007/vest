@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Kq extends Model
 {
-     protected  $fillable = ['key', 'title', 'content'];
+     protected  $fillable = ['key', 'title', 'content','create_by'];
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Kq;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class KqController extends Controller
@@ -22,11 +23,27 @@ class KqController extends Controller
     {
         $key = $request->input('key', '');
         $item = [];
-        if ($key) {
-            $items = Kq::where(compact('key'))->orderBy('created_at', 'desc')->paginate(10);
-        }else{
-            $items = Kq::orderBy('created_at', 'desc')->paginate(10);
+
+        //增加看见全部数据的用户id
+        $viewAll=[1];
+        $adminUser = Auth::getUser()->toArray();
+
+        $query = new Kq();
+        if($key){
+            $query=$query->where(compact('key'));
         }
+
+        if(!in_array($adminUser['id'],$viewAll)){
+            $query=$query->where('create_by',$adminUser['id']);
+        }
+        $items =$query->orderBy('created_at', 'desc')->paginate(10);
+
+//        if ($key) {
+//            $items = Kq::where(compact('key'))->orderBy('created_at', 'desc')->paginate(10);
+//        }else{
+//            $items = Kq::orderBy('created_at', 'desc')->paginate(10);
+//        }
+
         return view('kq', compact('items'));
     }
 
@@ -53,8 +70,11 @@ class KqController extends Controller
             'title' => '',
             'content' => 'required',
         ]);
+        //获取登录用户
+        $adminUser = Auth::getUser()->toArray();
 
-        $params = array_merge(request(['title', 'content']),['key'=>md5(time())]);
+        $params = array_merge(request(['title', 'content']),['key'=>md5(time()),'create_by'=>$adminUser['id']]);
+
         Kq::create($params);
 
         return redirect('/kq');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Item;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -25,11 +26,22 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $os = $request->input('os', '');
-        if ($os) {
-            $items = Item::where(compact('os'))->orderBy('created_at', 'desc')->paginate(20);
-        }else{
-            $items = Item::orderBy('created_at', 'desc')->paginate(20);
+        //增加看见全部数据的用户id
+        $viewAll=[1];
+        $adminUser = Auth::getUser()->toArray();
+
+        $query = new Item();
+        if($os){
+            $query=$query->where(compact('os'));
         }
+
+        if(!in_array($adminUser['id'],$viewAll)){
+            $query=$query->where('create_by',$adminUser['id']);
+        }
+
+        $items = $query->orderBy('created_at', 'desc')->paginate(20);
+
+
         return view('home', compact('items'));
     }
 
