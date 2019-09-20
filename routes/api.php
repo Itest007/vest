@@ -60,3 +60,11 @@ Route::any('/v1/getstore', 'Api\StoreController@getstore');
 
 Route::any('/v1/createRate', 'Api\ExchangRateController@createRate');
 Route::any('/v1/getRate', 'Api\ExchangRateController@getRate');
+
+
+Route::any('/v1/getFoods', 'Api\YpCookingController@getFoods');
+Route::any('/v1/addMenu', 'Api\YpCookingController@addMenu');
+Route::any('/v1/getMenu', 'Api\YpCookingController@getMenu');
+Route::any('/v1/addOrder', 'Api\YpCookingController@addOrder');
+Route::any('/v1/getOrderItems', 'Api\YpCookingController@getOrderItems');
+Route::any('/v1/confirmOrderItem', 'Api\YpCookingController@confirmOrderItem');
