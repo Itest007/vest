@@ -92,9 +92,11 @@ class YpCookingController extends Controller
         $this->validate($request, [
             'user_id' => 'required',
             'items' => 'required',
+            'date' => 'required',
         ]);
 
         $userId  = $request->input('user_id',"");
+        $date  = $request->input('date',date('Y-m-d'));
         $items  = json_decode($request->input('items',""),true);
         $orderId = Uuid::uuid();
         $integral =0;
@@ -121,7 +123,8 @@ class YpCookingController extends Controller
             'order_id'=>$orderId,
             'create_by'=>$userId,
             'items'=>json_encode($items),
-            'integral'=>$integral
+            'integral'=>$integral,
+            'date'=>$date
         ];
         $bol = YpOrder::insert($data);
 
@@ -136,25 +139,26 @@ class YpCookingController extends Controller
 
 
     public function getOrderItems(Request $request){
-        $todayDate = date('Y-m-d');
-        $orderId = $request->input('order_id');
+        $todayDate =  $request->input('date' ,date('Y-m-d'));
+        $user_id =  $request->input('user_id' ,'');
 
-        $query = new YpOrderItem();
+        $query = YpOrderItem::leftJoin('yp_orders','yp_order_items.order_id','=','yp_orders.order_id');
 
-        if($orderId){
-            $query = $query->where('order_id',$orderId);
+        if($user_id){
+            $query = $query->where('yp_orders.create_by',$user_id);
         }
 
-        $orderItems = $query->whereBetween('created_at',[$todayDate.' 00:00:00',$todayDate.' 23:59:59'])
-            ->groupBy('item_code')
-            ->select('item_code')
-            ->selectRaw('sum(num) as totalnum , sum(integral) as totalIntragel')
+        $orderItems = $query->where('yp_orders.date',$todayDate)
+            ->groupBy('yp_order_items.item_code')
+            ->select('yp_order_items.item_code')
+            ->selectRaw('sum(yp_order_items.num) as totalnum , sum(yp_order_items.integral) as totalIntragel')
             ->get()->toArray();
 
         return response()->json(
             ['code' => 0, 'message' => 'Success', 'data' => $orderItems]
         );
     }
+
 
 
     public function confirmOrderItem(Request $request){

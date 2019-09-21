@@ -20,6 +20,8 @@ class CreateYpOrdersTable extends Migration
             $table->longText('items')->comment('已购买的食品');
             $table->integer('integral')->comment('积分');
             $table->integer('status')->comment('状态（100：已完成，101：待发货，102：取消')->default(101);
+            $table->date('date')->comment('订单日期');
+
 
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
