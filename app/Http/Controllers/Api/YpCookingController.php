@@ -149,8 +149,8 @@ class YpCookingController extends Controller
         }
 
         $orderItems = $query->where('yp_orders.date',$todayDate)
-            ->groupBy('yp_order_items.item_code')
-            ->select('yp_order_items.item_code')
+            ->groupBy('yp_order_items.item_code','yp_order_items.status')
+            ->select('yp_order_items.item_code','yp_order_items.status')
             ->selectRaw('sum(yp_order_items.num) as totalnum , sum(yp_order_items.integral) as totalIntragel')
             ->get()->toArray();
 
