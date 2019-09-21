@@ -73,7 +73,7 @@ class YpCookingController extends Controller
         $todayDay = date('d');
         $numMap = $todayDay%3;
 
-        $todayDate = date('Y-m-d');
+        $todayDate = $request->input('date' ,date('Y-m-d'));
 
 
         $inmenu =YpMenu::select('*')
