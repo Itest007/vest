@@ -22,14 +22,19 @@ class YpCookingController extends Controller
     public function getFoods(Request $request){
 
         $type= $request->input('type',"");
+
         //循环三天菜单，取3的余数
-        $todayDate = date('d',strtotime($request->input('date','+ 1 day')));
-        $numMap = $todayDate%3;
+        $todayDay = date('d',strtotime($request->input('date','+ 1 day')));
+        $numMap = $todayDay%3;
+
+        $todayDate = $request->input('date' ,date('Y-m-d'));
+
 
 
         $inmenu =YpMenu::select('item_code')
             ->where('item_type',$type)
             ->where('date',$this->menuMap[$numMap])
+            ->orWhere('date',$todayDate)
             ->get()->toArray();
 
         $inmenu =array_column($inmenu,'item_code');
