@@ -17,6 +17,7 @@ class CreateYpOrderItemsTable extends Migration
             $table->increments('id');
             $table->string('order_id',255)->comment('订单号');
             $table->string('item_code',255)->comment('食品代号');
+            $table->mediumInteger('item_type')->comment('食品类型');
             $table->string('num',255)->comment('食品数量');
             $table->integer('integral')->comment('总的食品积分');
             $table->integer('status')->comment('状态（100：已完成，101：待发货，102：取消')->default(101);
