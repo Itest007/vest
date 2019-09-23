@@ -23,7 +23,7 @@ class YpCookingController extends Controller
 
         $type= $request->input('type',"");
         //循环三天菜单，取3的余数
-        $todayDate = date('d',$request->input('date',strtotime('+ 1 day')));
+        $todayDate = date('d',strtotime($request->input('date','+ 1 day')));
         $numMap = $todayDate%3;
 
 
