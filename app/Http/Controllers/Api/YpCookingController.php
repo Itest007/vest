@@ -9,6 +9,7 @@ use App\YpOrderItem;
 use Faker\Provider\Uuid;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class YpCookingController extends Controller
 {
@@ -155,10 +156,16 @@ class YpCookingController extends Controller
         }
 
         $orderItems = $query->where('yp_orders.date',$todayDate)
-            ->groupBy('yp_order_items.item_code','yp_order_items.status','yp_order_items.item_type')
-            ->select('yp_order_items.item_code','yp_order_items.status','yp_order_items.item_type')
+            ->groupBy('yp_order_items.item_code','yp_order_items.status','yp_order_items.item_type','yp_orders.date')
+            ->select('yp_order_items.item_code','yp_order_items.status','yp_order_items.item_type','yp_orders.date')
             ->selectRaw('sum(yp_order_items.num) as totalnum , sum(yp_order_items.integral) as totalIntragel')
             ->get()->toArray();
+
+
+
+//        $orderList = YpOrder::where('date',$todayDate)->get()->toArray();
+//        $orderItems = DB::select("select sum(num) as totalnum,sum(integral) as  totalIntegral,item_code,status,item_type where order_id in (select order_id from yp_order where date = ?)", [$todayDate]);
+
 
         return response()->json(
             ['code' => 0, 'message' => 'Success', 'data' => $orderItems]
