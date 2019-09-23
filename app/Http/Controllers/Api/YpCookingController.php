@@ -23,7 +23,7 @@ class YpCookingController extends Controller
 
         $type= $request->input('type',"");
         //循环三天菜单，取3的余数
-        $todayDate = date('d');
+        $todayDate = $request->input('date',date('d',strtotime('+ 1 day')));
         $numMap = $todayDate%3;
 
 
@@ -39,14 +39,14 @@ class YpCookingController extends Controller
 
 
 
-        $res = array_filter($foods,function ($v) use ($inmenu){
+        $res = array_filter($foods,function ($v,$k) use ($inmenu){
 
             return !in_array($v['item_code'],$inmenu);
-        });
+        },ARRAY_FILTER_USE_BOTH);
 
 
         return response()->json(
-            ['code' => 0, 'message' => 'Success', 'data' => $res]
+            ['code' => 0, 'message' => 'Success', 'data' => array_values($res)]
         );
     }
 
