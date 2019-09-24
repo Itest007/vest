@@ -88,6 +88,26 @@ class YpCookingController extends Controller
             ->orWhere('date',$todayDate)
             ->get()->toArray();
 
+        //获取预定总数量
+        $totalnum = YpOrderItem::leftJoin('yp_orders','yp_order_items.order_id','=','yp_orders.order_id')
+            ->where('yp_orders.date',$todayDate)
+            ->groupBy('yp_order_items.item_code')
+            ->select('yp_order_items.item_code')
+            ->selectRaw('sum(yp_order_items.num) as totalnum')
+            ->get()->toArray();
+
+        foreach ($inmenu as $k =>&$v){
+            foreach($totalnum as $_k => $_v){
+                if($v['item_code'] == $_v['item_code']){
+                    $v['totalnum'] = $_v['totalnum'];
+                }
+            }
+            if(!isset($v['totalnum'])){
+                $v['totalnum'] = 0;
+            }
+        }
+
+
         return response()->json(
             ['code' => 0, 'message' => 'Success', 'data' => $inmenu]
         );
@@ -162,6 +182,20 @@ class YpCookingController extends Controller
             ->get()->toArray();
 
 
+        $item_codearr = array_column($orderItems,'item_code');
+
+        $items =YpItemIntegral::whereIn('item_code',array_values($item_codearr))->get()->toArray();
+
+        foreach ($orderItems as $k =>&$v){
+            foreach($items as $_k => $_v){
+
+                if($v['item_code'] == $_v['item_code']){
+                    $v['name'] = $_v['name'];
+                    $v['integral'] = $_v['integral'];
+
+                }
+            }
+        }
 
 //        $orderList = YpOrder::where('date',$todayDate)->get()->toArray();
 //        $orderItems = DB::select("select sum(num) as totalnum,sum(integral) as  totalIntegral,item_code,status,item_type where order_id in (select order_id from yp_order where date = ?)", [$todayDate]);
