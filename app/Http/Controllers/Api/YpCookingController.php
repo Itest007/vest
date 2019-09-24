@@ -215,7 +215,8 @@ class YpCookingController extends Controller
 
         $item_code = $request->input('item_code');
 
-       $bol =  YpOrderItem::where('item_code',$item_code)->updated(['status'=>100]);
+       $bol =  YpOrderItem::where('item_code',$item_code)->update(['status'=>100]) >0 ? true :false;
+
         return response()->json(
             ['code' => 0, 'message' => 'Success', 'data' => $bol]
         );
