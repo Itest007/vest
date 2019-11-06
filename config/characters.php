@@ -1,4 +1,4 @@
-
+<?php
 
 return [
           "https://anapioficeandfire.com/api/characters/2",
